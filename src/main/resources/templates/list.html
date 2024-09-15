@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Forms</title>
+</head>
+<body>
+
+    <form action="/renderForm"  method="POST">
+        <label for="list">Please select form: </label>
+        <select id="list" name="list">
+            <option th:each="org : ${list}"
+                    th:value="${org}"
+                    th:text="${org}"></option>
+        </select>
+        <br>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

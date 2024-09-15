@@ -1,0 +1,57 @@
+<!-- dependencies (jquery, handlebars and bootstrap) -->
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+<link type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+<!-- alpaca -->
+<link type="text/css" href="//cdn.jsdelivr.net/npm/alpaca@1.5.27/dist/alpaca/bootstrap/alpaca.min.css" rel="stylesheet"/>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/alpaca@1.5.27/dist/alpaca/bootstrap/alpaca.min.js"></script>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="hidden" id="typeform" th:value="${properties}"/>
+<input type="hidden" id="typeform1" th:value="${options}"/>
+
+<div id="form"></div>
+<script type="text/javascript">
+$(document).ready(function() {
+    var prop = $("#typeform").val();
+    var newstring = prop.replace(/\"/g,'');
+    var cleanValue = newstring.replace(/'/g, '"');
+    var x = JSON.parse(cleanValue);
+    console.log(x);
+
+    var options = $("#typeform1").val();
+    var s = options.replace(/\"/g,'');
+    var cleanValue1 = s.replace(/'/g, '"');
+    var y = JSON.parse(cleanValue1);
+
+    $("#form").alpaca({
+        "schema": {
+            "title":"User Custom Form",
+            "type":"object",
+            "properties": x
+        },
+        "options" : {
+            "form":{
+                "attributes":{
+                    "action":"",
+                    "method":"post"
+                },
+                "buttons":{
+                    "submit":{}
+                }
+            },
+            "fields" : y
+        }
+    });
+});
+        </script>
+</body>
+</html>
